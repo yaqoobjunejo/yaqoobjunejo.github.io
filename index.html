@@ -567,7 +567,7 @@
 
                     <h3 class="work__title">MS (CN&S)</h3>
 
-                    <a href="https://www.nu.edu.pk/" class="work__button">
+                    <a href="#" class="work__button">
                         FAST - NUCES Karachi <i class='bx bx-right-arrow work__icon'></i>
                     </a>
                 </div>
@@ -577,7 +577,7 @@
 
                     <h3 class="work__title">BE (CSE)</h3>
 
-                    <a href="https://quest.edu.pk/" class="work__button">
+                    <a href="#" class="work__button">
                         QUEST Nawabshah <i class='bx bx-right-arrow work__icon'></i>
                     </a>
                 </div>
@@ -586,7 +586,7 @@
 
                     <h3 class="work__title">HSC (Pre-Engr.)</h3>
 
-                    <a href="https://lrk.szabist.edu.pk/" class="work__button">
+                    <a href="#" class="work__button">
                         SZABIST Larkana <i class='bx bx-right-arrow work__icon'></i>
                     </a>
                 </div>
@@ -886,7 +886,7 @@
 
             <div class="contact__container container grid">
                 <div class="contact__content">
-                    <h3 class="contact__title contact__title-info">Say hello @</h3>
+                    <h3 class="contact__title contact__title-info">Hello @</h3>
 
                     <div class="contact__info">
                         <div class="contact__card">
@@ -933,33 +933,71 @@
                     </div>
                 </div>
 
-                <div class="contact__content">
-                    <h3 class="contact__title contact__title-form">Write Me your Message</h3>
+<!--<div class="contact__content">
+    <h3 class="contact__title contact__title-form">Write Me your Message</h3>
+ modify this form HTML and place wherever you want your form -->
+<!--<form
+  action="https://formspree.io/f/xwkdbnqo"
+  method="POST"
+  enctype="multipart/form-data"
+>
+  <label>
+    Your email:
+    <input type="email" name="email">
+  </label>
+  <label>
+    Your file:
+    <input type="file" name="upload">
+  </label>
+  <button type="submit">Send</button>
+</form>-->
 
-                    <form action="" class="contact__form">
-                        <div class="contact__form-div">
-                            <label for="" class="contact__form-tag">Name</label>
-                            <input type="text" placeholder="Enter name" class="contact__form-input">
-                        </div>
+<div class="contact__content">
+    <h3 class="contact__title contact__title-form">Write Me your Message</h3>
 
-                        <div class="contact__form-div">
-                            <label for="" class="contact__form-tag">Mail</label>
-                            <input type="text" placeholder="Enter email" class="contact__form-input">
-                        </div>
+<!--<form
+  action="https://formspree.io/f/xwkdbnqo"
+  method="POST"
+>
+  <label>
+    Your Name:
+    <input type="text" name="name">
+  </label>
+  <label>
+    Your email:
+    <input type="email" name="email">
+  </label>
+  <label>
+    Your message:
+    <textarea name="message"></textarea>
+  </label>
+  <button type="submit">Send</button>
+</form>-->
+    <form action="https://formspree.io/f/mdorzlll" method="POST" class="contact__form">
+        <div class="contact__form-div">
+            <label for="name" class="contact__form-tag">Name</label>
+            <input type="text" name="name" id="name" name="name" placeholder="Enter your name" class="contact__form-input">
+        </div>
 
-                        <div class="contact__form-div contact__form-area">
-                            <label for="" class="contact__form-tag">Message</label>
-                            <textarea name="" id="" cols="30" rows="10" placeholder="Write your Message"
-                                class="contact__form-input "></textarea>
-                        </div>
+        <div class="contact__form-div">
+            <label for="email" class="contact__form-tag">Email</label>
+            <input type="email" name="email" id="email" name="_replyto" placeholder="Enter your email" class="contact__form-input">
+        </div>
+
+        <div class="contact__form-div contact__form-area">
+            <label for="message" class="contact__form-tag">Message</label>
+            <textarea id="message" name="message" cols="30" rows="10" placeholder="Write your Message" class="contact__form-input"></textarea>
+        </div>
+
+        <button type="submit" class="button">Send Message</button>
+    </form>
+</div>
 
 
-                        <button class="button">
-                            Send Message
-                        </button>
-                    </form>
 
-                </div>
+
+</div>
+
 
         </section>
     </main>
