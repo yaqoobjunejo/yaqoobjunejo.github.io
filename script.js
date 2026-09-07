@@ -354,7 +354,7 @@ document.documentElement.classList.add('js');
   const wrap = document.getElementById('wordRotate');
   const inner = document.getElementById('wordRotateInner');
   if (!wrap || !inner) return;
-  const words = ['networks', 'systems', 'endpoints', 'identities', 'critical infra', 'the enterprise'];
+  const words = ['networks', 'systems', 'endpoints', 'identities', 'critical infra', 'enterprise'];
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce) return;
 
@@ -467,7 +467,7 @@ document.documentElement.classList.add('js');
         throw new Error('Request failed');
       }
     } catch (err) {
-      status.textContent = 'Something went wrong. Please email hello@yaqoobjunejo.com directly.';
+      status.textContent = 'Something went wrong. Please email myaqoobjunejo@hotmail.com directly.';
       status.className = 'form-status err';
     } finally {
       submitBtn.disabled = false;
