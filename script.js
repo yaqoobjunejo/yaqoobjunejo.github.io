@@ -354,7 +354,7 @@ document.documentElement.classList.add('js');
   const wrap = document.getElementById('wordRotate');
   const inner = document.getElementById('wordRotateInner');
   if (!wrap || !inner) return;
-  const words = ['networks.', 'systems.', 'endpoints.', 'identities.', 'critical infra.', 'enterprise.'];
+  const words = ['networks', 'systems', 'endpoints', 'identities', 'critical infra', 'enterprise'];
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce) return;
 
