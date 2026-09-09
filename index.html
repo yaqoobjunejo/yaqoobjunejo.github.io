@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Website under construction. Something new is being built.">
+    <meta name="theme-color" content="#030507">
+
+    <!-- Theme-aware favicons -->
+    <link
+        id="favicon"
+        rel="icon"
+        type="image/png"
+        href="icon.svg"
+    >
+    <link
+        id="apple-touch-icon"
+        rel="apple-touch-icon"
+        href="icon.svg"
+    >
+
+    <title>Work in Progress | Under Construction</title>
+
+    <style>
+        /* =========================================================
+           DARK THEME — DEFAULT
+        ========================================================= */
+
+        :root {
+            color-scheme: dark;
+
+            --bg: #030507;
+            --bg-secondary: #070b11;
+
+            --surface: rgba(9, 15, 22, 0.72);
+            --surface-border: rgba(43, 218, 225, 0.18);
+
+            --text: #f2f7f8;
+            --text-muted: #819096;
+
+            --cyan: #29d7df;
+            --cyan-bright: #51f3f5;
+            --cyan-dark: #0a7e86;
+
+            --grid: rgba(41, 215, 223, 0.055);
+
+            --shadow:
+                0 0 30px rgba(41, 215, 223, 0.10),
+                0 0 80px rgba(41, 215, 223, 0.04);
+
+            --transition: 300ms ease;
+        }
+
+        /* =========================================================
+           LIGHT THEME — MANUAL TOGGLE ONLY
+        ========================================================= */
+
+        body.light {
+            color-scheme: light;
+
+            --bg: #f3f7f8;
+            --bg-secondary: #e9eff1;
+
+            --surface: rgba(255, 255, 255, 0.78);
+            --surface-border: rgba(7, 102, 108, 0.18);
+
+            --text: #071114;
+            --text-muted: #53666b;
+
+            --cyan: #079ca5;
+            --cyan-bright: #00cbd3;
+            --cyan-dark: #066b71;
+
+            --grid: rgba(7, 156, 165, 0.07);
+
+            --shadow:
+                0 0 30px rgba(7, 156, 165, 0.12),
+                0 0 80px rgba(7, 156, 165, 0.05);
+        }
+
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+
+            font-family:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            overflow: hidden;
+
+            transition:
+                background var(--transition),
+                color var(--transition);
+        }
+
+        /* =========================================================
+           MAIN
+        ========================================================= */
+
+        .page {
+            position: relative;
+            min-height: 100vh;
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        /* =========================================================
+           CYBER GRID
+        ========================================================= */
+
+        .grid {
+            position: absolute;
+            inset: -50%;
+
+            z-index: -5;
+
+            background-image:
+                linear-gradient(var(--grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+
+            background-size: 55px 55px;
+
+            transform:
+                perspective(600px)
+                rotateX(58deg)
+                translateY(20%);
+
+            transform-origin: center bottom;
+
+            animation: gridMove 18s linear infinite;
+        }
+
+        @keyframes gridMove {
+            from {
+                background-position: 0 0;
+            }
+
+            to {
+                background-position: 0 55px;
+            }
+        }
+
+        /* =========================================================
+           AMBIENT GLOW
+        ========================================================= */
+
+        .ambient {
+            position: absolute;
+
+            width: 700px;
+            height: 700px;
+
+            left: 50%;
+            top: 50%;
+
+            transform: translate(-50%, -50%);
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(41, 215, 223, 0.10) 0%,
+                    rgba(41, 215, 223, 0.04) 30%,
+                    transparent 70%
+                );
+
+            filter: blur(20px);
+
+            z-index: -4;
+
+            animation: breathe 5s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+            0%,
+            100% {
+                transform: translate(-50%, -50%) scale(0.9);
+                opacity: 0.6;
+            }
+
+            50% {
+                transform: translate(-50%, -50%) scale(1.08);
+                opacity: 1;
+            }
+        }
+
+        /* =========================================================
+           SCAN LINE
+        ========================================================= */
+
+        .scanline {
+            position: absolute;
+            left: 0;
+            right: 0;
+
+            height: 1px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--cyan),
+                    transparent
+                );
+
+            opacity: 0.35;
+
+            box-shadow: 0 0 15px var(--cyan);
+
+            z-index: 20;
+
+            animation: scan 6s linear infinite;
+
+            pointer-events: none;
+        }
+
+        @keyframes scan {
+            0% {
+                top: -5%;
+            }
+
+            100% {
+                top: 105%;
+            }
+        }
+
+        /* =========================================================
+           PARTICLES
+        ========================================================= */
+
+        .particles {
+            position: absolute;
+            inset: 0;
+
+            z-index: -2;
+
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+
+            width: 2px;
+            height: 2px;
+
+            background: var(--cyan);
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 8px var(--cyan),
+                0 0 15px var(--cyan);
+
+            opacity: 0;
+
+            animation:
+                floatParticle linear infinite,
+                particleBlink ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) {
+            left: 10%;
+            animation-duration: 12s, 2s;
+        }
+
+        .particle:nth-child(2) {
+            left: 22%;
+            animation-duration: 16s, 3s;
+            animation-delay: 2s;
+        }
+
+        .particle:nth-child(3) {
+            left: 35%;
+            animation-duration: 13s, 2.5s;
+            animation-delay: 5s;
+        }
+
+        .particle:nth-child(4) {
+            left: 48%;
+            animation-duration: 18s, 3s;
+            animation-delay: 1s;
+        }
+
+        .particle:nth-child(5) {
+            left: 61%;
+            animation-duration: 14s, 2s;
+            animation-delay: 4s;
+        }
+
+        .particle:nth-child(6) {
+            left: 73%;
+            animation-duration: 17s, 3s;
+            animation-delay: 3s;
+        }
+
+        .particle:nth-child(7) {
+            left: 84%;
+            animation-duration: 11s, 2.5s;
+            animation-delay: 6s;
+        }
+
+        .particle:nth-child(8) {
+            left: 92%;
+            animation-duration: 15s, 2s;
+            animation-delay: 2s;
+        }
+
+        @keyframes floatParticle {
+            from {
+                top: 110%;
+            }
+
+            to {
+                top: -10%;
+            }
+        }
+
+        @keyframes particleBlink {
+            0%,
+            100% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        /* =========================================================
+           TOP BAR
+        ========================================================= */
+
+        .topbar {
+            position: absolute;
+
+            top: 0;
+            left: 0;
+            right: 0;
+
+            height: 74px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 5vw;
+
+            border-bottom: 1px solid var(--surface-border);
+
+            background: rgba(3, 5, 7, 0.25);
+
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+
+            z-index: 30;
+        }
+
+        body.light .topbar {
+            background: rgba(243, 247, 248, 0.5);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .brand-dot {
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: var(--cyan);
+
+            box-shadow:
+                0 0 10px var(--cyan),
+                0 0 20px rgba(41, 215, 223, 0.4);
+
+            animation: dotPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes dotPulse {
+            0%,
+            100% {
+                opacity: 0.5;
+                transform: scale(0.8);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+        }
+
+        /* =========================================================
+           THEME BUTTON
+        ========================================================= */
+
+        .theme-toggle {
+            width: 42px;
+            height: 42px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid var(--surface-border);
+            border-radius: 50%;
+
+            background: var(--surface);
+
+            color: var(--text);
+
+            cursor: pointer;
+
+            transition:
+                transform var(--transition),
+                border-color var(--transition),
+                background var(--transition);
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(20deg);
+
+            border-color: var(--cyan);
+
+            box-shadow:
+                0 0 20px rgba(41, 215, 223, 0.15);
+        }
+
+        .theme-toggle:focus-visible {
+            outline: 2px solid var(--cyan);
+            outline-offset: 4px;
+        }
+
+        .theme-toggle svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* =========================================================
+           CONTENT
+        ========================================================= */
+
+        .content {
+            width: min(900px, 92vw);
+
+            text-align: center;
+
+            position: relative;
+
+            padding: 50px 30px 40px;
+
+            animation: contentIn 1s ease-out both;
+        }
+
+        @keyframes contentIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =========================================================
+           LOGO
+        ========================================================= */
+
+        .logo-container {
+            position: relative;
+
+            width: 155px;
+            height: 155px;
+
+            margin: 0 auto 38px;
+
+            display: grid;
+            place-items: center;
+        }
+
+        .logo-ring {
+            position: absolute;
+
+            inset: -18px;
+
+            border: 1px solid rgba(41, 215, 223, 0.18);
+
+            border-radius: 50%;
+
+            animation: rotateRing 12s linear infinite;
+        }
+
+        .logo-ring::before,
+        .logo-ring::after {
+            content: "";
+
+            position: absolute;
+
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: var(--cyan);
+
+            box-shadow: 0 0 12px var(--cyan);
+        }
+
+        .logo-ring::before {
+            top: -3px;
+            left: 50%;
+        }
+
+        .logo-ring::after {
+            bottom: -3px;
+            right: 18%;
+        }
+
+        @keyframes rotateRing {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .logo-glow {
+            position: absolute;
+
+            width: 125px;
+            height: 125px;
+
+            border-radius: 50%;
+
+            background: rgba(41, 215, 223, 0.10);
+
+            filter: blur(25px);
+
+            animation: logoGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes logoGlow {
+            0%,
+            100% {
+                opacity: 0.4;
+                transform: scale(0.85);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.15);
+            }
+        }
+
+        .logo {
+            position: relative;
+
+            width: 135px;
+            height: 135px;
+
+            object-fit: contain;
+
+            filter:
+                drop-shadow(0 0 12px rgba(41, 215, 223, 0.45))
+                drop-shadow(0 0 30px rgba(41, 215, 223, 0.12));
+
+            animation: logoFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-7px);
+            }
+        }
+
+        /* =========================================================
+           STATUS
+        ========================================================= */
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+
+            gap: 9px;
+
+            padding: 8px 14px;
+
+            margin-bottom: 25px;
+
+            border: 1px solid var(--surface-border);
+
+            background: var(--surface);
+
+            border-radius: 999px;
+
+            color: var(--cyan);
+
+            font-family:
+                "SFMono-Regular",
+                Consolas,
+                "Liberation Mono",
+                monospace;
+
+            font-size: 11px;
+            font-weight: 600;
+
+            letter-spacing: 0.15em;
+
+            text-transform: uppercase;
+
+            box-shadow: var(--shadow);
+        }
+
+        .status-indicator {
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: var(--cyan);
+
+            box-shadow: 0 0 10px var(--cyan);
+
+            animation: statusPulse 1.5s infinite;
+        }
+
+        @keyframes statusPulse {
+            0%,
+            100% {
+                opacity: 0.4;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* =========================================================
+           HEADLINE
+        ========================================================= */
+
+        h1 {
+            font-size: clamp(42px, 7vw, 82px);
+
+            line-height: 0.95;
+
+            letter-spacing: -0.055em;
+
+            font-weight: 800;
+
+            margin-bottom: 25px;
+
+            color: var(--text);
+
+            text-shadow:
+                0 0 30px rgba(255, 255, 255, 0.04);
+        }
+
+        h1 span {
+            display: block;
+
+            color: var(--cyan);
+
+            text-shadow:
+                0 0 15px rgba(41, 215, 223, 0.35),
+                0 0 40px rgba(41, 215, 223, 0.12);
+        }
+
+        /* =========================================================
+           DESCRIPTION
+        ========================================================= */
+
+        .description {
+            max-width: 600px;
+
+            margin: 0 auto;
+
+            color: var(--text-muted);
+
+            font-size: 16px;
+
+            line-height: 1.8;
+
+            letter-spacing: 0.01em;
+        }
+
+        /* =========================================================
+           PROGRESS
+        ========================================================= */
+
+        .progress-wrapper {
+            width: min(460px, 90%);
+
+            margin: 40px auto 0;
+
+            text-align: left;
+        }
+
+        .progress-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 9px;
+
+            font-family:
+                "SFMono-Regular",
+                Consolas,
+                monospace;
+
+            font-size: 10px;
+
+            letter-spacing: 0.12em;
+
+            color: var(--text-muted);
+
+            text-transform: uppercase;
+        }
+
+        .progress-meta strong {
+            color: var(--cyan);
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            position: relative;
+
+            width: 100%;
+            height: 4px;
+
+            overflow: hidden;
+
+            background: rgba(128, 150, 155, 0.12);
+
+            border-radius: 20px;
+        }
+
+        .progress-fill {
+            position: relative;
+
+            width: 68%;
+            height: 100%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--cyan-dark),
+                    var(--cyan-bright)
+                );
+
+            box-shadow:
+                0 0 10px rgba(41, 215, 223, 0.7),
+                0 0 25px rgba(41, 215, 223, 0.25);
+
+            animation: progressGlow 2s ease-in-out infinite;
+        }
+
+        .progress-fill::after {
+            content: "";
+
+            position: absolute;
+
+            right: 0;
+            top: -5px;
+
+            width: 30px;
+            height: 14px;
+
+            background: var(--cyan-bright);
+
+            filter: blur(8px);
+
+            opacity: 0.7;
+        }
+
+        @keyframes progressGlow {
+            0%,
+            100% {
+                opacity: 0.7;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        .footer {
+            position: absolute;
+
+            bottom: 28px;
+            left: 0;
+            right: 0;
+
+            text-align: center;
+
+            color: var(--text-muted);
+
+            font-family:
+                "SFMono-Regular",
+                Consolas,
+                monospace;
+
+            font-size: 9px;
+
+            letter-spacing: 0.18em;
+
+            text-transform: uppercase;
+
+            opacity: 0.7;
+        }
+
+        .footer span {
+            color: var(--cyan);
+        }
+
+        /* =========================================================
+           CORNER DECORATIONS
+        ========================================================= */
+
+        .corner {
+            position: absolute;
+
+            width: 55px;
+            height: 55px;
+
+            opacity: 0.5;
+        }
+
+        .corner::before,
+        .corner::after {
+            content: "";
+
+            position: absolute;
+
+            background: var(--cyan);
+        }
+
+        .corner::before {
+            width: 100%;
+            height: 1px;
+        }
+
+        .corner::after {
+            width: 1px;
+            height: 100%;
+        }
+
+        .corner.tl {
+            top: 105px;
+            left: 35px;
+        }
+
+        .corner.tr {
+            top: 105px;
+            right: 35px;
+
+            transform: rotate(90deg);
+        }
+
+        .corner.bl {
+            bottom: 75px;
+            left: 35px;
+
+            transform: rotate(-90deg);
+        }
+
+        .corner.br {
+            bottom: 75px;
+            right: 35px;
+
+            transform: rotate(180deg);
+        }
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 600px) {
+
+            body {
+                overflow: auto;
+            }
+
+            .topbar {
+                height: 64px;
+                padding: 0 20px;
+            }
+
+            .brand {
+                font-size: 9px;
+            }
+
+            .content {
+                padding: 100px 20px 90px;
+            }
+
+            .logo-container {
+                width: 125px;
+                height: 125px;
+
+                margin-bottom: 30px;
+            }
+
+            .logo {
+                width: 110px;
+                height: 110px;
+            }
+
+            .logo-ring {
+                inset: -12px;
+            }
+
+            .description {
+                font-size: 14px;
+                line-height: 1.7;
+            }
+
+            .progress-wrapper {
+                margin-top: 30px;
+            }
+
+            .corner {
+                display: none;
+            }
+
+            .footer {
+                bottom: 18px;
+                font-size: 8px;
+            }
+        }
+
+        /* =========================================================
+           REDUCED MOTION
+        ========================================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="page">
+
+        <!-- Ambient background -->
+        <div class="ambient"></div>
+        <div class="grid"></div>
+        <div class="scanline"></div>
+
+        <!-- Floating particles -->
+        <div class="particles" aria-hidden="true">
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+        </div>
+
+        <!-- Top bar -->
+        <header class="topbar">
+
+            <div class="brand">
+                <span class="brand-dot"></span>
+                <span>System Development</span>
+            </div>
+
+            <button
+                class="theme-toggle"
+                id="themeToggle"
+                type="button"
+                aria-label="Switch to light mode"
+                title="Switch to light mode"
+            >
+                <!-- Moon: visible in dark mode -->
+                <svg
+                    id="moonIcon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    aria-hidden="true"
+                >
+                    <path
+                        d="M21 12.8A8.5 8.5 0 1 1 11.2 3
+                           6.7 6.7 0 0 0 21 12.8Z"
+                    />
+                </svg>
+
+                <!-- Sun: visible in light mode -->
+                <svg
+                    id="sunIcon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    style="display:none;"
+                    aria-hidden="true"
+                >
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path d="M12 2v2"></path>
+                    <path d="M12 20v2"></path>
+                    <path d="m4.93 4.93 1.41 1.41"></path>
+                    <path d="m17.66 17.66 1.41 1.41"></path>
+                    <path d="M2 12h2"></path>
+                    <path d="M20 12h2"></path>
+                    <path d="m6.34 17.66-1.41 1.41"></path>
+                    <path d="m19.07 4.93-1.41 1.41"></path>
+                </svg>
+            </button>
+
+        </header>
+
+        <!-- Decorative corners -->
+        <div class="corner tl" aria-hidden="true"></div>
+        <div class="corner tr" aria-hidden="true"></div>
+        <div class="corner bl" aria-hidden="true"></div>
+        <div class="corner br" aria-hidden="true"></div>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Logo -->
+            <div class="logo-container">
+
+                <div class="logo-ring" aria-hidden="true"></div>
+                <div class="logo-glow" aria-hidden="true"></div>
+
+                <img
+                    src="icon.svg"
+                    alt="Website logo"
+                    class="logo"
+                    id="logo"
+                >
+
+            </div>
+
+            <!-- Status -->
+            <div class="status">
+                <span class="status-indicator"></span>
+                <span>System Status: In Development</span>
+            </div>
+
+            <!-- Heading -->
+            <h1>
+                Work in
+                <span>Progress.</span>
+            </h1>
+
+            <!-- Description -->
+            <p class="description">
+                Something new is being built behind the scenes.
+                The architecture is taking shape, the systems are
+                being engineered, and the final experience is
+                getting closer.
+            </p>
+
+            <!-- Progress -->
+            <div class="progress-wrapper">
+
+                <div class="progress-meta">
+                    <span>Deployment Progress</span>
+                    <strong>68%</strong>
+                </div>
+
+                <div
+                    class="progress-bar"
+                    role="progressbar"
+                    aria-label="Deployment progress"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    aria-valuenow="68"
+                >
+                    <div class="progress-fill"></div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <span>BUILDING</span> • SECURING • REFINING
+        </footer>
+
+    </main>
+
+    <script>
+        /* =========================================================
+           THEME SWITCHER
+           DARK IS ALWAYS THE INITIAL DEFAULT
+        ========================================================= */
+
+        const themeToggle = document.getElementById("themeToggle");
+        const moonIcon = document.getElementById("moonIcon");
+        const sunIcon = document.getElementById("sunIcon");
+        const logo = document.getElementById("logo");
+        const favicon = document.getElementById("favicon");
+        const appleTouchIcon = document.getElementById("apple-touch-icon");
+
+        function setTheme(theme) {
+
+            if (theme === "light") {
+
+                document.body.classList.add("light");
+
+                moonIcon.style.display = "none";
+                sunIcon.style.display = "block";
+
+                themeToggle.setAttribute(
+                    "aria-label",
+                    "Switch to dark mode"
+                );
+
+                themeToggle.setAttribute(
+                    "title",
+                    "Switch to dark mode"
+                );
+
+                logo.src = "icon-light.svg";
+
+                // Use the light logo as the favicon in light mode.
+                favicon.type = "image/svg+xml";
+                favicon.href = "icon-light.svg";
+                appleTouchIcon.href = "icon-light.svg";
+
+            } else {
+
+                document.body.classList.remove("light");
+
+                moonIcon.style.display = "block";
+                sunIcon.style.display = "none";
+
+                themeToggle.setAttribute(
+                    "aria-label",
+                    "Switch to light mode"
+                );
+
+                themeToggle.setAttribute(
+                    "title",
+                    "Switch to light mode"
+                );
+
+                logo.src = "icon.svg";
+
+                // Use the dark logo as the favicon in dark mode.
+                favicon.type = "image/png";
+                favicon.href = "icon.svg";
+                appleTouchIcon.href = "icon.svg";
+            }
+
+            localStorage.setItem("theme", theme);
+        }
+
+
+        /* =========================================================
+           TOGGLE
+        ========================================================= */
+
+        themeToggle.addEventListener("click", () => {
+
+            const isLight =
+                document.body.classList.contains("light");
+
+            setTheme(isLight ? "dark" : "light");
+
+        });
+
+
+        /* =========================================================
+           IMPORTANT:
+           DARK / BLACK MODE IS THE DEFAULT.
+
+           We intentionally do NOT use the operating system's
+           prefers-color-scheme setting.
+
+           If the visitor has previously selected a theme,
+           their choice is remembered.
+
+           Otherwise the site starts in DARK mode.
+        ========================================================= */
+
+        const savedTheme = localStorage.getItem("theme");
+
+        if (savedTheme === "light") {
+            setTheme("light");
+        } else {
+            setTheme("dark");
+        }
+    </script>
+
+</body>
+</html>
