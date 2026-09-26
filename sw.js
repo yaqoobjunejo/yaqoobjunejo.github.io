@@ -1,4 +1,4 @@
-const CACHE = 'portfolio-v9';
+const CACHE = 'portfolio-v10';
 
 // Relative paths — resolved against this file's own location (the SW
 // scope), so this works whether the site is hosted at a domain root
@@ -8,8 +8,10 @@ const CACHE = 'portfolio-v9';
 const PRECACHE = [
   './',
   'index.html',
+  'cv.html',
   'style.css',
   'script.js',
+  'cv.js',
   '404.html',
   'manifest.json',
   'icon.svg',
@@ -17,6 +19,9 @@ const PRECACHE = [
   'icon-dark-1.png',
   'icon-dark-2.png',
   'icon-dark-3.png',
+  'resume.pdf',
+  'resume.tex',
+  'resume-latex-source.zip',
 ];
 
 self.addEventListener('install', event => {

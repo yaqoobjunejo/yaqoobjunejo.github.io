@@ -862,7 +862,7 @@ footer {
    --------------------------------------------------------------------- */
 .dock {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 190;
-  display: grid; grid-template-columns: repeat(6, 1fr);
+  display: grid; grid-template-columns: repeat(7, 1fr);
   background: color-mix(in srgb, var(--color-bg) 92%, transparent);
   backdrop-filter: blur(18px) saturate(160%);
   -webkit-backdrop-filter: blur(18px) saturate(160%);
@@ -945,4 +945,79 @@ footer {
   body { background: #fff; color: #000; }
   main { padding-top: 0; }
   .section { border-top: 1px solid #ccc; }
+  .dl-modal-overlay, .cv-toolbar { display: none !important; }
+  .resume-sheet { border: 0; padding: 0; }
 }
+
+.resume-btn-desktop.active { border-color: var(--color-brand-primary); color: var(--color-brand-primary); }
+
+/* =========================================================================
+   RÉSUMÉ PAGE — view switch, formatted sheet, LaTeX source, download modal
+   ========================================================================= */
+
+.cv-toolbar { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); flex-wrap: wrap; margin-bottom: var(--sp-5); }
+.view-switch { display: inline-flex; border: 1px solid var(--color-border-strong); border-radius: var(--radius); padding: 0.25rem; background: var(--color-surface); }
+.view-switch button {
+  font-family: var(--mono); font-size: 0.72rem; font-weight: 600; color: var(--color-text-muted);
+  padding: 0.55rem 1rem; border-radius: calc(var(--radius) - 4px); display: inline-flex; align-items: center; gap: 0.4rem;
+  transition: background var(--dur), color var(--dur);
+}
+.view-switch button.active { background: var(--color-brand-primary); color: var(--color-on-brand); }
+.toolbar-actions { display: flex; gap: 0.7rem; }
+
+.cv-panel { display: none; }
+.cv-panel.active { display: block; }
+
+.resume-sheet { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--sp-5); }
+@media (min-width: 768px) { .resume-sheet { padding: var(--sp-6); } }
+.resume-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--sp-3); border-bottom: 1px solid var(--color-border-strong); padding-bottom: var(--sp-4); margin-bottom: var(--sp-4); }
+.resume-head h1 { font-size: var(--fs-xl); margin-bottom: 0.2rem; }
+.resume-head .role { font-family: var(--mono); font-size: var(--fs-sm); color: var(--color-brand-primary); }
+.resume-contact { font-family: var(--mono); font-size: 0.74rem; color: var(--color-text-muted); line-height: 1.9; text-align: right; }
+@media (max-width: 480px) { .resume-contact { text-align: left; } }
+.resume-summary { color: var(--color-text-secondary); margin-bottom: var(--sp-5); max-width: var(--measure); }
+.resume-block { margin-bottom: var(--sp-5); }
+.resume-block:last-child { margin-bottom: 0; }
+
+.code-panel { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; }
+.code-head { display: flex; align-items: center; justify-content: space-between; padding: var(--sp-3) var(--sp-4); border-bottom: 1px solid var(--color-border); }
+.code-head .fname { font-family: var(--mono); font-size: 0.76rem; color: var(--color-text-secondary); display: inline-flex; align-items: center; gap: 0.4rem; }
+.code-head .fname svg { color: var(--color-brand-primary); }
+.copy-btn {
+  font-family: var(--mono); font-size: 0.68rem; color: var(--color-text-secondary); background: var(--color-surface-alt);
+  border: 1px solid var(--color-border-strong); border-radius: var(--radius-sm); padding: 0.4rem 0.7rem;
+  display: inline-flex; align-items: center; gap: 0.35rem; transition: border-color var(--dur), color var(--dur);
+}
+.copy-btn:hover { border-color: var(--color-brand-primary); color: var(--color-brand-primary); }
+.code-panel pre { margin: 0; padding: var(--sp-4); overflow-x: auto; max-height: 620px; }
+.code-panel code { font-family: var(--mono); font-size: 0.78rem; line-height: 1.75; color: var(--color-text-secondary); white-space: pre; }
+.tex-cmd { color: var(--color-brand-primary); }
+.tex-brace { color: var(--color-status-warning); }
+.tex-cmt { color: var(--color-text-muted); font-style: italic; }
+.code-note { font-size: var(--fs-xs); color: var(--color-text-muted); margin-top: var(--sp-3); }
+.code-note code { font-family: var(--mono); background: var(--color-surface-alt); padding: 0.1rem 0.35rem; border-radius: 4px; }
+
+.dl-modal-overlay {
+  position: fixed; inset: 0; z-index: 300; display: flex; align-items: center; justify-content: center; padding: var(--sp-3);
+  opacity: 0; pointer-events: none; transition: opacity var(--dur) var(--ease);
+}
+.dl-modal-overlay.open { opacity: 1; pointer-events: auto; }
+.dl-modal-backdrop { position: fixed; inset: 0; background: rgba(8,10,15,0.7); backdrop-filter: blur(3px); }
+html.light .dl-modal-backdrop { background: rgba(20,23,31,0.45); }
+.dl-modal { position: relative; background: var(--color-surface); border: 1px solid var(--color-border-strong); border-radius: var(--radius-lg); padding: var(--sp-5); width: 100%; max-width: 400px; box-shadow: var(--shadow); transform: scale(0.96); transition: transform var(--dur) var(--ease); }
+.dl-modal-overlay.open .dl-modal { transform: scale(1); }
+.dl-modal h3 { font-size: var(--fs-md); margin-bottom: 0.3rem; }
+.dl-modal > p { font-size: var(--fs-sm); color: var(--color-text-secondary); margin-bottom: var(--sp-4); }
+.dl-option {
+  display: flex; align-items: center; gap: 0.9rem; width: 100%; padding: var(--sp-3);
+  border: 1px solid var(--color-border-strong); border-radius: var(--radius); background: var(--color-surface-alt);
+  margin-bottom: 0.7rem; transition: border-color var(--dur), transform var(--dur);
+}
+.dl-option:hover { border-color: var(--color-brand-primary); transform: translateY(-1px); }
+.dl-option .ic { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.dl-option .ic.pdf { background: rgba(213,86,77,0.14); color: var(--color-status-error); }
+.dl-option .ic.tex { background: var(--color-brand-subtle); color: var(--color-brand-primary); }
+.dl-option b { display: block; font-size: var(--fs-sm); color: var(--color-text-primary); }
+.dl-option small { font-family: var(--mono); font-size: 0.68rem; color: var(--color-text-muted); }
+.dl-cancel { text-align: center; padding: 0.6rem; color: var(--color-text-muted); font-family: var(--mono); font-size: 0.72rem; margin-top: 0.2rem; }
+.dl-cancel:hover { color: var(--color-text-primary); }
